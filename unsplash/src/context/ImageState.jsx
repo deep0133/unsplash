@@ -7,7 +7,7 @@ function ImageState({ children }) {
   const [imageData, setImageData] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
   // backend url :
-  const url = "https://unsplashbackend.onrender.com";
+  const url = "https://unsplashbackend.onrender.com/";
 
   // Function to fetch images from the API
   const fetchImages = async () => {
