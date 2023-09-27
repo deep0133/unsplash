@@ -5,7 +5,7 @@ import { useState } from "react";
 function UserStates({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
-  const url = "https://unsplashbackend.onrender.com/";
+  const url = "https://unsplashbackend.onrender.com/auth/";
 
   // Function to fetch images from the API
   const profile = async () => {
