@@ -7,14 +7,13 @@ function ImageState({ children }) {
   const [imageData, setImageData] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
   // backend url :
-  const url = "http://localhost:5000/";
+  const url = "https://unsplashbackend.onrender.com";
 
   // Function to fetch images from the API
   const fetchImages = async () => {
     try {
       const response = await fetch(url + "photos");
       const data = await response.json();
-      // setImages(data.photos);
       setImageData(data.photos);
     } catch (error) {
       console.error("Error fetching images:", error);
@@ -41,8 +40,6 @@ function ImageState({ children }) {
           Authorization: `Bearer ${token}`,
         },
       });
-      // const newImage = await response.json();
-      // setImages(newImage.photos.imageUrl); // Add the new image to the state
       fetchImages();
     } catch (error) {
       console.error("Error adding image:", error);
@@ -64,8 +61,6 @@ function ImageState({ children }) {
           Authorization: `Bearer ${token}`,
         },
       });
-      // Remove the deleted image from the state
-      // setImages(images.filter((image) => image.id !== imageId));
       fetchImages();
     } catch (error) {
       console.error("Error deleting image:", error);
