@@ -1,14 +1,15 @@
 import React from "react";
 import ImageContext from "./ImageContext";
 import PropTypes from "prop-types";
+import { toast } from "react-toastify";
 
 function ImageState({ children }) {
   const [images, setImages] = React.useState([]);
   const [imageData, setImageData] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
   // backend url :
-  // const url = "https://unsplashbackend.onrender.com/";
-  const url = "http://localhost:5000/";
+  const url = "https://unsplashbackend.onrender.com/";
+  // const url = "http://localhost:5000/";
 
   // Function to fetch images from the API
   const fetchImages = async () => {
@@ -33,7 +34,7 @@ function ImageState({ children }) {
 
       const token = localStorage.getItem("token");
       // Make API request to add image
-      await fetch(url + "photos/add", {
+      const response = await fetch(url + "photos/add", {
         method: "POST",
         body: JSON.stringify(imageData),
         headers: {
@@ -41,6 +42,8 @@ function ImageState({ children }) {
           Authorization: `Bearer ${token}`,
         },
       });
+      const data = await response.json();
+      toast.success(data.message);
       fetchImages();
     } catch (error) {
       console.log("Error adding image:", error);
