@@ -180,7 +180,7 @@ function Header() {
                 className={`px-4 py-2 ${
                   loading && "cursor-progress"
                 } text-white bg-[#3DB46D] rounded-md`}>
-                {loading ? "loading..." : "Add"}
+                {loading ? "Processing..." : "Add"}
               </button>
             </div>
           </div>

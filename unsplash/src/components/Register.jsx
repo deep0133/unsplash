@@ -140,7 +140,7 @@ function Register() {
                   />
                 </svg>
               )}
-              {loading ? "loading..." : "Register"}
+              {loading ? "Processing..." : "Register"}
             </button>
           </div>
           <div className='register space-y-6'>

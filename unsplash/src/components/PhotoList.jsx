@@ -75,7 +75,7 @@ const PhotoList = ({ photos }) => {
                 className={`px-4 py-2 ${
                   loading && "cursor-progress"
                 } text-white bg-[#EB5757] rounded-md`}>
-                {loading ? "loading..." : "Delete"}
+                {loading ? "Processing..." : "Delete"}
               </button>
             </div>
           </div>

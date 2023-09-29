@@ -3,15 +3,18 @@ import { Link } from "react-router-dom";
 import homeIcon from "../assets/icons/home.svg";
 import arrowIcon from "../assets/icons/leftArrow.svg";
 import UserContext from "../context/User/userContext";
+import { useNavigate } from "react-router-dom";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
 
   const { loginUser, user, loading } = useContext(UserContext);
 
   const loginHandler = async () => {
     await loginUser(email, password);
-    if (user) window.location.pathname = "/";
+    if (user) navigate("/");
   };
 
   return (
@@ -112,7 +115,7 @@ function Login() {
                   />
                 </svg>
               )}
-              {loading ? "loading..." : "Login"}
+              {loading ? "Processing..." : "Login"}
             </button>
           </div>
           <div className='register space-y-6'>
