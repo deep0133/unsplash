@@ -16,7 +16,7 @@ const registerUser = async (req, res, next) => {
     try {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            return next(new ErrorHandler("All fields Required", 422));
+            return next(new ErrorHandler("All fields Required", 204));
         }
 
         const { name, email, password } = req.body;
@@ -24,7 +24,7 @@ const registerUser = async (req, res, next) => {
         // Check if the user with the provided email already exists
         const existingUser = await User.findOne({ email });
         if (existingUser) {
-            return next(new ErrorHandler("User Already Exist", 409));
+            return next(new ErrorHandler("User Already Exist", 400));
         }
 
         // Create a new user with the provided data
@@ -57,11 +57,11 @@ const loginUser = async (req, res, next) => {
 
         const comparePassword = await existingUser.comparePassword(password)
 
-        if (!comparePassword) return next("Credentials Invalid", 401)
+        if (!comparePassword) return next(new ErrorHandler("Credentials Invalid", 401))
 
         const token = await existingUser.generateToken()
 
-        res.status(201).json({ success: true, message: 'Login successfully', token });
+        res.status(200).json({ success: true, message: 'Login successfully', token });
     } catch (err) {
         return next(new ErrorHandler("Failed to Login user", 409));
     }
