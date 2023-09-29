@@ -7,7 +7,8 @@ function ImageState({ children }) {
   const [imageData, setImageData] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
   // backend url :
-  const url = "https://unsplashbackend.onrender.com/";
+  // const url = "https://unsplashbackend.onrender.com/";
+  const url = "http://localhost:5000/";
 
   // Function to fetch images from the API
   const fetchImages = async () => {
@@ -16,7 +17,7 @@ function ImageState({ children }) {
       const data = await response.json();
       setImageData(data.photos);
     } catch (error) {
-      console.error("Error fetching images:", error);
+      console.log("Error fetching images:", error);
     }
   };
 
@@ -42,7 +43,7 @@ function ImageState({ children }) {
       });
       fetchImages();
     } catch (error) {
-      console.error("Error adding image:", error);
+      console.log("Error adding image:", error);
     }
     setLoading(false);
   };

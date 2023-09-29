@@ -7,6 +7,9 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import UserContext from "./context/User/userContext";
 import SpinnerIcon from "./assets/icons/spinner.svg";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function App() {
   const { images, fetchImages, setImages, imageData } =
     useContext(ImageContext);
@@ -29,6 +32,7 @@ function App() {
           element={
             <>
               <Header />
+              <ToastContainer />
               <Suspense
                 fallback={
                   <div className='flex justify-center items-center w-full h-[100lvh]'>

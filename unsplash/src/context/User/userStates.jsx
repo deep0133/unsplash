@@ -1,12 +1,15 @@
 import UserContext from "./userContext";
 import PropTypes from "prop-types";
 import { useState } from "react";
-
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 function UserStates({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
   const url = "https://unsplashbackend.onrender.com/auth/";
+  // const url = "http://localhost:5000/auth/";
 
+  const navigate = useNavigate();
   // Function to fetch images from the API
   const profile = async () => {
     try {
@@ -39,9 +42,14 @@ function UserStates({ children }) {
       });
       const data = await response.json();
       localStorage.setItem("token", data.token);
-      window.location.pathname = "/";
+      toast.success(data.message);
+      if (data && data.success) {
+        profile();
+      }
+      navigate("/");
     } catch (error) {
       console.error("Error fetching images:", error);
+      toast.error(error.data.message);
     }
     setLoading(false);
   };
@@ -58,9 +66,14 @@ function UserStates({ children }) {
       });
       const data = await response.json();
       localStorage.setItem("token", data.token);
-      window.location.pathname = "/";
+      toast.success(data.message);
+      if (data && data.success) {
+        profile();
+      }
+      navigate("/");
     } catch (error) {
-      console.error("Error fetching images:", error);
+      console.log("Error fetching images:", error);
+      toast.error(error.data.message);
     }
     setLoading(false);
   };
