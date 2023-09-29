@@ -57,7 +57,7 @@ function ImageState({ children }) {
       const token = localStorage.getItem("token");
       setLoading(true);
       // Make API request to delete image
-      await fetch(`${url}photos/delete/${imageId}`, {
+      const response = await fetch(`${url}photos/delete/${imageId}`, {
         method: "DELETE",
         body: JSON.stringify({ password }),
         headers: {
@@ -65,6 +65,8 @@ function ImageState({ children }) {
           Authorization: `Bearer ${token}`,
         },
       });
+      const data = await response.json();
+      toast.success(data.message);
       fetchImages();
     } catch (error) {
       console.error("Error deleting image:", error);
