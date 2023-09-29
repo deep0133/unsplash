@@ -5,7 +5,7 @@ const { imageUrlToDataURI } = require('../utils/dataUri')
 const User = require('../model/User')
 const cloudinary = require('cloudinary').v2
 
-const getAllPhotos = async (req, res) => {
+const getAllPhotos = async (req, res, next) => {
     try {
         const photos = await Photo.find({})
         res.json({ message: 'all photos', photos })
